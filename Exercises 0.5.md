@@ -1,8 +1,18 @@
-flowchart TD  
-    A[User] -->|Navigates to| B[Single Page App]  
-    B -->|Renders Initial View| C[Input Area for New Note]  
-    C -->|Enters Note Text| D[Save Button]  
-    D -->|Clicks Save| E[AJAX POST Request to Server]  
-    E -->|Server Saves Note| F[Server Response with New Note Data]  
-    F -->|Update UI| G[Display New Note in Notes List]  
-    G -->|Show Confirmation Message| H[User Sees New Note Added]
+
+```mermaid
+sequenceDiagram  
+    participant User  
+    participant Browser  
+    participant Server  
+
+    User->>Browser: Enters text into the note text field  
+    Browser->>User: Displays entered text  
+
+    User->>Browser: Clicks "Save" button  
+    Browser->>Server: Sends POST request with note data  
+    Note right of Server: (The data includes the note text)  
+    
+    Server->>Server: Processes the request (validate and store note)  
+    Server-->>Browser: Responds with success message or new note data  
+
+    Browser->>User: Displays confirmation message or updated notes list
